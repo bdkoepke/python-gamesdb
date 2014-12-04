@@ -63,7 +63,7 @@ class API(object):
             response = requests.get(api_url+'%s' % get_params)
         else:
             response = requests.get(api_url)
-        page = response.text
+        page = response.text.encode('ascii', 'ignore')
 
         # Make sure the XML Parser doesn't return a ParsError.  If it does, it's probably and API Issue, so raise an
         # exception, printing the response from the API call.
