@@ -1,4 +1,4 @@
-import urllib
+import requests
 import xml.etree.ElementTree as ET
 from urlutils import urlencode_no_plus
 
@@ -60,10 +60,10 @@ class API(object):
         # APIException, passing forward the pages contents (which generally gives some indication of the error.
         if query_args is not None:
             get_params = urlencode_no_plus.urlencode_no_plus(query_args)
-            response = urllib.urlopen(api_url+'%s' % get_params)
+            response = requests.get(api_url+'%s' % get_params)
         else:
-            response = urllib.urlopen(api_url)
-        page = response.read()
+            response = requests.get(api_url)
+        page = response.text
 
         # Make sure the XML Parser doesn't return a ParsError.  If it does, it's probably and API Issue, so raise an
         # exception, printing the response from the API call.
